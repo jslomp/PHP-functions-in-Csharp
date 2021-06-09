@@ -1,3 +1,10 @@
+/*
+    Author: Jacob Slomp
+    Website: www.slomp.ca
+
+
+*/
+
 using System;
 using System.Collections.Generic;
 using System.IO;
