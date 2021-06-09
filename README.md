@@ -17,19 +17,19 @@ Use php functions in csharp to make it easier to go from PHP to c#.
 
 
 Add to your code:
-
+```
 Using PHPFunctions;
-
+```
 
 
 Use it as following:
-
+```
 string result = php.file_get_contents("filename.txt");
-
+```
 or
-
+```
 string result = php.file_get_contents("http://www.slomp.ca");
-
+```
 
 
  Because php works always with scalable arrays we use List<string> instead of string[]
@@ -38,11 +38,14 @@ string result = php.file_get_contents("http://www.slomp.ca");
  end( input will be list )
 
   Usage:
+ 
+ ```
  List<string> myArray = php.explode(" ","this is a text");
+ 
  Console.WriteLine( php.end(myArray) ); // will return text
-  
-  Console.WriteLine( php.implode("-",myArray) ); // will return this-is-a-text
-  
+ 
+ Console.WriteLine( php.implode("-",myArray) ); // will return this-is-a-text
+ ``` 
   
   
  just like PHP
