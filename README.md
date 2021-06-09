@@ -15,7 +15,12 @@ This is under active development, and nowere near to be done. many functions has
 
 Use php functions in csharp to make it easier to go from PHP to c#.
 
-add the class to your project, rename the namespace to your class.
+
+Add to your code:
+
+Using PHPFunctions;
+
+
 
 Use it as following:
 
