@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 // make sure to change the name space to your project.
 namespace word_regonizer
 {
@@ -115,18 +116,18 @@ namespace word_regonizer
 
         static public string substr(string Text, int Offset, int Lenght=0)
         {
-            int TotalChars = Text.Length;
+            int TotalChars = Lenght;
 
             if (Offset < 0)
             {
-                Offset = Text.Length - Offset;
+                Offset = Text.Length + Offset;
             }
 
-            TotalChars = Offset + Lenght;
-
-            if(TotalChars > Text.Length)
+            
+            
+            if(TotalChars+Offset > Text.Length)
             {
-                TotalChars = Text.Length;
+                TotalChars = Text.Length - Offset;
             }
 
             return Text.Substring(Offset, TotalChars);
