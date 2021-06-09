@@ -72,7 +72,37 @@ namespace word_regonizer
             return Text;
         }
 
+        static public List<string> scandir(string dir)
+        {
+            string[] dirs = Directory.GetDirectories(dir);
+            string[] files = Directory.GetFiles(dir);
+            List<string> res = new List<string>();
 
+            // we all hate this dont we?
+            // enable if you like it...
+            // res.Add("."); 
+            // res.Add(".."); 
+
+            foreach (string d in dirs)
+            {
+                res.Add(php.end(php.explode("\\", d)));
+            }
+            foreach (string f in files)
+            {
+                res.Add(php.end(php.explode("\\", f)));
+            }
+
+            return res;
+
+        }
+        static public Boolean is_dir(string dirName)
+        {
+            return Directory.Exists(dirName);
+        }
+        static public Boolean is_file(string fileName)
+        {
+            return File.Exists(fileName);
+        }
         static public string rawurlencode(string text)
         {
             return rawurlcoderHelper(text, 1);
