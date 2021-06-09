@@ -29,8 +29,8 @@ using System.Threading.Tasks;
 
 
 
-// make sure to change the name space to your project.
-namespace word_regonizer
+
+namespace PHPFunctions
 {
     static class php
     {
