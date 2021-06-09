@@ -1,9 +1,13 @@
 /*
     Author: Jacob Slomp
     Website: www.slomp.ca
+    Free to use
 
+    and help write functions to make it better
 
 */
+
+
 
 using System;
 using System.Collections.Generic;
@@ -44,7 +48,10 @@ namespace word_regonizer
 
             TotalChars = Offset + Lenght;
 
-
+            if(TotalChars > Text.Length)
+            {
+                TotalChars = Text.Length;
+            }
 
             return Text.Substring(Offset, TotalChars);
         }
@@ -53,6 +60,11 @@ namespace word_regonizer
             string[] res = Text.Split(new string[] { Seperator }, StringSplitOptions.None);
 
             return new List<string>(res);
+        }
+
+        static public string implode(string glue, List<string> Pieces)
+        {
+            return String.Join(glue, Pieces.ToArray());
         }
 
         static public string file_get_contents(string file_or_url)
@@ -72,5 +84,53 @@ namespace word_regonizer
         {
             return File.Exists(fileName);
         }
+
+        
+        static private string htmlEncoderHelper(string Text, int type)
+        {
+            // add more characters.
+            Dictionary<string, string> safeChars = new Dictionary<string, string>();
+            safeChars.Add("&", "&amp;");
+            safeChars.Add("<", "&lt;");
+            safeChars.Add(">", "&gt;");
+            safeChars.Add("\"", "&quot;");
+
+            foreach (KeyValuePair<string, string> entry in safeChars)
+            {
+                    Text = Text.Replace(type == 1 ? entry.Key : entry.Value, type == 2 ? entry.Key : entry.Value);
+            }
+            return Text;
+        }
+
+        static public string htmlentities(string Text)
+        {
+            return php.htmlEncoderHelper(Text, 1);
+        }
+
+        static public string html_entity_decode(string Text)
+        {
+            return php.htmlEncoderHelper(Text, 2); ;
+        }
+
+
+        public static string md5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
+        }
+
+
     }
 }
