@@ -39,7 +39,6 @@ namespace word_regonizer
             safeChars.Add("$", "%24");
             safeChars.Add("(", "%28");
             safeChars.Add(")", "%29");
-            safeChars.Add("$", "%24");
             safeChars.Add(" ", "%20");
             safeChars.Add("\n", "%0A");
             safeChars.Add("\t", "%09");
@@ -132,16 +131,30 @@ namespace word_regonizer
             }
             safeChars.Add("<", "&lt;");
             safeChars.Add(">", "&gt;");
+            safeChars.Add("®", "&reg;");
+            safeChars.Add("©", "&copy;");
+            safeChars.Add("™", "&trade;");
+            safeChars.Add("•", "&bull;");
+            safeChars.Add("¼", "&frac14;");
+            safeChars.Add("½", "&frac12;");
             safeChars.Add("\"", "&quot;");
 
             if (type == 2)
             {
+                //
+                safeChars.Add(" ", "&nbsp;");
+
                 safeChars.Add("&", "&amp;");
             }
 
             foreach (KeyValuePair<string, string> entry in safeChars)
             {
-                    Text = Text.Replace(type == 1 ? entry.Key : entry.Value, type == 2 ? entry.Key : entry.Value);
+                Text = Text.Replace(type == 1 ? entry.Key : entry.Value, type == 2 ? entry.Key : entry.Value);
+                if (type == 2)
+                {
+                    // uppercase has to be replaced too.
+                    Text = Text.Replace(entry.Value.ToUpper(), entry.Key);
+                }
             }
             return Text;
         }
