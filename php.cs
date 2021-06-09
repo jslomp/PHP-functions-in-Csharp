@@ -21,20 +21,54 @@ namespace word_regonizer
 {
     static class php
     {
+
+
+        static private string rawurlcoderHelper(string Text, int type)
+        {
+            // add more characters.
+            Dictionary<string, string> safeChars = new Dictionary<string, string>();
+
+            if (type == 1)
+            {
+                safeChars.Add("%", "%25");
+            }
+
+            safeChars.Add("#", "%23");
+            safeChars.Add("$", "%24");
+            safeChars.Add("(", "%28");
+            safeChars.Add(")", "%29");
+            safeChars.Add("$", "%24");
+            safeChars.Add(" ", "%20");
+            safeChars.Add("\n", "%0A");
+            safeChars.Add("\t", "%09");
+            safeChars.Add("\r", "%0D");
+            safeChars.Add("'", "%27");
+            safeChars.Add("\"", "%22");
+            safeChars.Add("&", "%26");
+            safeChars.Add("=", "%3D");
+            safeChars.Add("\\", "%5C");
+
+            if (type == 2)
+            {
+                safeChars.Add("%", "%25");
+            }
+
+            foreach (KeyValuePair<string, string> entry in safeChars)
+            {
+                Text = Text.Replace(type == 1 ? entry.Key : entry.Value, type == 2 ? entry.Key : entry.Value);
+            }
+            return Text;
+        }
+
+
         static public string rawurlencode(string text)
         {
-            text = text.Replace(" ", "%20");
-            text = text.Replace("\n", "%0A");
-            text = text.Replace("\t", "%09");
-            text = text.Replace("\r", "%0D");
-            text = text.Replace("'", "%27");
-            text = text.Replace("\"", "%22");
-            text = text.Replace("&", "%26");
-            text = text.Replace("=", "%3D");
-            text = text.Replace("\\", "%5C");
-            text = text.Replace("\\", "%5C");
+            return rawurlcoderHelper(text, 1);
+        }
 
-            return text;
+        static public string rawurldecode(string text)
+        {
+            return rawurlcoderHelper(text, 2);
         }
 
         static public string substr(string Text, int Offset, int Lenght=0)
@@ -90,10 +124,18 @@ namespace word_regonizer
         {
             // add more characters.
             Dictionary<string, string> safeChars = new Dictionary<string, string>();
-            safeChars.Add("&", "&amp;");
+            if (type == 1)
+            {
+                safeChars.Add("&", "&amp;");
+            }
             safeChars.Add("<", "&lt;");
             safeChars.Add(">", "&gt;");
             safeChars.Add("\"", "&quot;");
+
+            if (type == 2)
+            {
+                safeChars.Add("&", "&amp;");
+            }
 
             foreach (KeyValuePair<string, string> entry in safeChars)
             {
