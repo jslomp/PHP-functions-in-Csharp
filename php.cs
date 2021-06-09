@@ -8,6 +8,16 @@
 */
 
 
+// because php works always with scalable arrays we use List<string> instead of string[]
+// so explode() will return a list
+// end( input will be list )
+// usage:
+// List<string> myArray = php.explode(" ","this is a text");
+// Console.WriteLine( php.end(myArray) ); // will return text
+// just like PHP
+
+
+
 
 using System;
 using System.Collections.Generic;
@@ -27,6 +37,7 @@ namespace word_regonizer
 
         static private string rawurlcoderHelper(string Text, int type)
         {
+            
             // add more characters.
             Dictionary<string, string> safeChars = new Dictionary<string, string>();
 
@@ -115,6 +126,10 @@ namespace word_regonizer
             }
 
         }
+        static public void file_put_contents(string file_name, string content = "")
+        {
+            File.WriteAllText(file_name, content);
+        }
         static public Boolean file_exists(string fileName)
         {
             return File.Exists(fileName);
@@ -158,7 +173,10 @@ namespace word_regonizer
             }
             return Text;
         }
-
+        static public string end(List<string> aArray)
+        {
+            return aArray[aArray.Count - 1];
+        }
         static public string htmlentities(string Text)
         {
             return php.htmlEncoderHelper(Text, 1);
