@@ -17,6 +17,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+
+// make sure to change the name space to your project.
 namespace word_regonizer
 {
     static class php
