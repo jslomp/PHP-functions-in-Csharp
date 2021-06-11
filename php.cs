@@ -46,7 +46,7 @@ namespace PHPFunctions
             {
                 safeChars.Add("%", "%25");
             }
-
+            
             safeChars.Add("#", "%23");
             safeChars.Add("$", "%24");
             safeChars.Add("(", "%28");
@@ -175,6 +175,7 @@ namespace PHPFunctions
             {
                 safeChars.Add("&", "&amp;");
             }
+            safeChars.Add("'", "&#039;");
             safeChars.Add("<", "&lt;");
             safeChars.Add(">", "&gt;");
             safeChars.Add("®", "&reg;");
