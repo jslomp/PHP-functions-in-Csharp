@@ -83,9 +83,15 @@ namespace PHPFunctions
         }
         static public string base64_decode(string encodedString)
         {
-            var bytes = Convert.FromBase64String(encodedString);
-
-            var decodedString = Encoding.UTF8.GetString(bytes);
+            string decodedString = "";
+            try
+            {
+                var bytes = Convert.FromBase64String(encodedString);
+                decodedString = Encoding.UTF8.GetString(bytes);
+            }catch(FormatException e)
+            {
+                
+            }
 
             return decodedString;
         }
