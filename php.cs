@@ -72,7 +72,23 @@ namespace PHPFunctions
             }
             return Text;
         }
+        /* Base64 encode and decode in c# csharp */
+        static public string base64_encode(string originalString)
+        {
+            var bytes = Encoding.UTF8.GetBytes(originalString);
 
+            var encodedString = Convert.ToBase64String(bytes);
+
+            return encodedString;
+        }
+        static public string base64_decode(string encodedString)
+        {
+            var bytes = Convert.FromBase64String(encodedString);
+
+            var decodedString = Encoding.UTF8.GetString(bytes);
+
+            return decodedString;
+        }
         static public List<string> scandir(string dir)
         {
             string[] dirs = Directory.GetDirectories(dir);
