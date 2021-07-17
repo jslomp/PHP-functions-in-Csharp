@@ -38,7 +38,7 @@ namespace PHPFunctions
 
         static private string rawurlcoderHelper(string Text, int type)
         {
-            
+
             // add more characters.
             Dictionary<string, string> safeChars = new Dictionary<string, string>();
 
@@ -46,7 +46,7 @@ namespace PHPFunctions
             {
                 safeChars.Add("%", "%25");
             }
-            
+
             safeChars.Add("#", "%23");
             safeChars.Add("$", "%24");
             safeChars.Add("(", "%28");
@@ -72,29 +72,7 @@ namespace PHPFunctions
             }
             return Text;
         }
-        /* Base64 encode and decode in c# csharp */
-        static public string base64_encode(string originalString)
-        {
-            var bytes = Encoding.UTF8.GetBytes(originalString);
 
-            var encodedString = Convert.ToBase64String(bytes);
-
-            return encodedString;
-        }
-        static public string base64_decode(string encodedString)
-        {
-            string decodedString = "";
-            try
-            {
-                var bytes = Convert.FromBase64String(encodedString);
-                decodedString = Encoding.UTF8.GetString(bytes);
-            }catch(FormatException e)
-            {
-                
-            }
-
-            return decodedString;
-        }
         static public List<string> scandir(string dir)
         {
             string[] dirs = Directory.GetDirectories(dir);
@@ -126,6 +104,31 @@ namespace PHPFunctions
         {
             return File.Exists(fileName);
         }
+
+        static public string base64_encode(string originalString)
+        {
+            var bytes = Encoding.UTF8.GetBytes(originalString);
+
+            var encodedString = Convert.ToBase64String(bytes);
+
+            return encodedString;
+        }
+        static public string base64_decode(string encodedString)
+        {
+            string decodedString = "";
+            try
+            {
+                var bytes = Convert.FromBase64String(encodedString);
+                decodedString = Encoding.UTF8.GetString(bytes);
+            }catch(FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return decodedString;
+        }
+
+
         static public string rawurlencode(string text)
         {
             return rawurlcoderHelper(text, 1);
@@ -136,7 +139,7 @@ namespace PHPFunctions
             return rawurlcoderHelper(text, 2);
         }
 
-        static public string substr(string Text, int Offset, int Lenght=0)
+        static public string substr(string Text, int Offset, int Lenght = 0)
         {
             int TotalChars = Lenght;
 
@@ -145,9 +148,9 @@ namespace PHPFunctions
                 Offset = Text.Length + Offset;
             }
 
-            
-            
-            if(TotalChars+Offset > Text.Length)
+
+
+            if (TotalChars + Offset > Text.Length)
             {
                 TotalChars = Text.Length - Offset;
             }
@@ -188,9 +191,13 @@ namespace PHPFunctions
             return File.Exists(fileName);
         }
 
-        
+
         static private string htmlEncoderHelper(string Text, int type)
         {
+            if(Text == null)
+            {
+                return "";
+            }
             // add more characters.
             Dictionary<string, string> safeChars = new Dictionary<string, string>();
             if (type == 1)
