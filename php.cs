@@ -248,7 +248,11 @@ namespace PHPFunctions
             return php.htmlEncoderHelper(Text, 2); ;
         }
 
-
+        static public string str_replace(string text, string oldStr, string newStr)
+        {
+            text = text.Replace(oldStr, newStr);
+            return text;
+        }
         public static string md5(string input)
         {
             // Use input string to calculate MD5 hash
