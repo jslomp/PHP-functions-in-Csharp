@@ -35,6 +35,84 @@ namespace PHPFunctions
     static class php
     {
 
+        static public string str_repeat(string sText, int times)
+        {
+            string output = "";
+            for(int i=0; i < times; i++)
+            {
+                output += sText;
+            }
+            return output;
+
+        }
+        static public string print_r(Dictionary<string,string> aArray, Boolean returnOutput = false, int tabs =0)
+        {
+            string echo = "Dictionary<string,string>\n(";
+            foreach (KeyValuePair<string,string> valpair in aArray)
+            {
+                echo += "\t"+ str_repeat("\t", tabs)+ "[" + valpair.Key + "] => "+valpair.Value+"\n";
+            }
+            echo += ")";
+            if(returnOutput == false)
+            {
+                Console.WriteLine(echo);
+                echo = "";
+            }
+            return echo;
+        }
+        static public string print_r(Dictionary<string, Dictionary<string,string>> aArray, Boolean returnOutput = false)
+        {
+            string echo = "Dictionary<string,string>\n(";
+            foreach (KeyValuePair<string, Dictionary<string,string>> valpair in aArray)
+            {
+                echo += "\t[" + valpair.Key + "] =>  Dictionary<string,string>\n\t ( \n";
+                echo += print_r(valpair.Value, true,1);
+                echo += "\t)\n";
+
+            }
+            echo += ")\n";
+            if (returnOutput == false)
+            {
+                Console.WriteLine(echo);
+                echo = "";
+            }
+            return echo;
+        }
+        static public string print_r(List<string> aArray, Boolean returnOutput = false)
+        {
+            string echo = "List<string>\n(";
+            int i = 0;
+            foreach (string val in aArray)
+            {
+                echo += "\t[" + i.ToString() + "] => " + aArray[i] + "\n";
+                i++;
+            }
+            echo += ")";
+            if (returnOutput == false)
+            {
+                Console.WriteLine(echo);
+                echo = "";
+            }
+            return echo;
+        }
+
+        static public string print_r(KeyValuePair<string,string> aArray, Boolean returnOutput = false)
+        {
+            string echo = "KeyValuePair<string,string>\n(";
+            echo += "\t[" + aArray.Key + "] => " + aArray.Value + "\n";
+            echo += ")\n";
+            if (returnOutput == false)
+            {
+                Console.WriteLine(echo);
+                echo = "";
+            }
+            return echo;
+        }
+
+        static public string print_r(string[] aArray, Boolean returnOutput = false)
+        {
+            return print_r(aArray.ToList(), returnOutput);
+        }
 
         static private string rawurlcoderHelper(string Text, int type)
         {
@@ -239,8 +317,6 @@ namespace PHPFunctions
                 Offset = Text.Length + Offset;
             }
 
-
-
             if (TotalChars + Offset > Text.Length)
             {
                 TotalChars = Text.Length - Offset;
@@ -268,16 +344,17 @@ namespace PHPFunctions
 
         static public List<string> explode(string Seperator, string Text)
         {
-            string[] res = Text.Split(new string[] { Seperator }, StringSplitOptions.None);
-
-            return new List<string>(res);
+            return Text.Split(new string[] { Seperator }, StringSplitOptions.None).ToList();
         }
 
         static public string implode(string glue, List<string> Pieces)
         {
             return String.Join(glue, Pieces.ToArray());
         }
-
+        static public string implode(string glue, string[] Pieces)
+        {
+            return String.Join(glue, Pieces);
+        }
         static public string file_get_contents(string file_or_url)
         {
             if (php.substr(file_or_url, 0, 7) == "http://" || php.substr(file_or_url, 0, 8) == "https://")
