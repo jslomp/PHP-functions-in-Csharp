@@ -50,6 +50,10 @@ string result = php.file_get_contents("http://www.slomp.ca");
   
  just like PHP
 
+ 
+print_r equivalent in c#
+print_r(); is a very powerfull function that prints out arrays.
+I haven't made every single type yet, but will add more as we go.
 
-  
-  
+Usage: php.print_r( Dictionairy<string,string> | List<string> | string[] .... )
+There are more types, just look in the code. 
